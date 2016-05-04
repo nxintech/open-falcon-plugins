@@ -176,13 +176,9 @@ class Jdk7MBean extends JavaLangMbean implements CatalinaMbean {
     String TenuredGen = "Tenured Gen"
     String PermGen = "Perm Gen"
     String CodeCache = "Code Cache"
-
+    def zones = [EdenSpace, SurvivorSpace, TenuredGen, PermGen, CodeCache]
+    
     Jdk7MBean(ip, port) { super(ip, port) }
-
-    // MemoryPool
-    def getMemoryPool() {
-    }
-
 }
 
 class Jdk8MBean extends JavaLangMbean implements CatalinaMbean {
