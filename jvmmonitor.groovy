@@ -211,7 +211,7 @@ def createJdkMbean(ip, port) {
 
 // main
 def main() {
-    JavaLangMbean jmb = createJdkMbean("localhost", 10053)
+    def jmb = createJdkMbean("localhost", 10053)
 
     // jvm monitor info
     jmb.getThreading()
