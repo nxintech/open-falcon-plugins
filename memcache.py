@@ -82,7 +82,7 @@ Entry = {
     "Step": 60,
 }
 entry_list = []
-host, port = "172.16.200.98", 11211
+host, port = "localhost", 11211
 mc = MemcacheClient((host, port), timeout=5)
 
 
