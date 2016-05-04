@@ -148,6 +148,5 @@ def mget_slabs():
 if __name__ == "__main__":
     mget_stats()
     mget_slabs()
-    for entry in entry_list:
-        print entry
+    print(entry_list)
 
