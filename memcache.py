@@ -100,7 +100,10 @@ def mget_stats():
             hits_number = int(value)
 
     mem_used_percent = round(_bytes * 100.0 / total_bytes, 2)
-    cmd_hits_percent = round(hits_number * 100.0 / get_number, 2)
+    if get_number == 0:
+        cmd_hits_percent = 0
+    else:
+        cmd_hits_percent = round(hits_number * 100.0 / get_number, 2)
 
     entry = Entry.copy()
     entry.update({
