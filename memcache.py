@@ -4,6 +4,7 @@
 import socket
 import time
 from itertools import izip
+import json
 
 
 def group_by(iterable, n):
@@ -149,5 +150,5 @@ def mget_slabs():
 if __name__ == "__main__":
     mget_stats()
     mget_slabs()
-    print(entry_list)
+    print json.dumps(entry_list)
 
