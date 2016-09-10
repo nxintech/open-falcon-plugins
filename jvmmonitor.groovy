@@ -171,10 +171,10 @@ trait CatalinaMbean {
 
 
 class Jdk7MBean extends JavaLangMbean implements CatalinaMbean {
-    String EdenSpace = "Eden Space"
-    String SurvivorSpace = "Survivor Space"
-    String TenuredGen = "Tenured Gen"
-    String PermGen = "Perm Gen"
+    String EdenSpace = "PS Eden Space"
+    String SurvivorSpace = "PS Survivor Space"
+    String TenuredGen = "PS Old Gen"
+    String PermGen = "PS Perm Gen"
     String CodeCache = "Code Cache"
     def zones = [EdenSpace, SurvivorSpace, TenuredGen, PermGen, CodeCache]
     
