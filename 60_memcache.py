@@ -5,6 +5,7 @@ import socket
 import time
 from itertools import izip
 import json
+from os import popen as bash
 
 
 def group_by(iterable, n):
@@ -80,9 +81,6 @@ Entry = {
     "Timestamp": int(time.time()),
     "Step": 60,
 }
-entry_list = []
-host, port = "localhost", 11211
-mc = MemcacheClient((host, port), timeout=5)
 
 
 def mget_stats():
@@ -148,7 +146,16 @@ def mget_slabs():
         entry_list.append(entry)
 
 if __name__ == "__main__":
-    mget_stats()
-    mget_slabs()
+    entry_list = []
+    host = "localhost"
+    port_list = bash("ps -ef |grep memcached|grep -v grep |awk '{print $NF}' ").read().split('\n')
+    # drop null value
+    port_list.pop()
+
+    for port in port_list:
+        port = int(port)
+        mc = MemcacheClient((host, (port)), timeout=5)
+        mget_stats()
+        mget_slabs()
     print json.dumps(entry_list)
 
