@@ -1,4 +1,4 @@
-#!/usr/local/env groovy
+#!/bin/env groovy
 
 /**
  * Created on 2016/4/7.
@@ -124,14 +124,14 @@ class JavaLangMbean extends Mbean {
     def dumpEntryList() {
         def json = new JsonBuilder()
         json.call(entryList)
-        println(json.toPrettyString())
+        println(json.toString())
     }
 }
 
 
 trait CatalinaMbean {
     private String _cls = "Catalina"
-    String name = "\"http-bio-8080\""
+    String name = "\"http-nio-8080\""
 
     def getThreadingPool() {
         def type = "ThreadPool"
@@ -171,10 +171,10 @@ trait CatalinaMbean {
 
 
 class Jdk7MBean extends JavaLangMbean implements CatalinaMbean {
-    String EdenSpace = "PS Eden Space"
-    String SurvivorSpace = "PS Survivor Space"
-    String TenuredGen = "PS Old Gen"
-    String PermGen = "PS Perm Gen"
+    String EdenSpace = "Eden Space"
+    String SurvivorSpace = "Survivor Space"
+    String TenuredGen = "Tenured Gen"
+    String PermGen = "Perm Gen"
     String CodeCache = "Code Cache"
     def zones = [EdenSpace, SurvivorSpace, TenuredGen, PermGen, CodeCache]
     
