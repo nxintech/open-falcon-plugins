@@ -7,6 +7,7 @@ import groovy.json.JsonBuilder
 /**
  * Created on 2016/4/7.
  * author web
+ * 需要 JVM 开启 JMX
  */
 
 
@@ -123,7 +124,7 @@ class JavaLangMbean extends Mbean {
     def dumpEntryList() {
         def json = new JsonBuilder()
         json.call(entryList)
-        println(json.toPrettyString())
+        println(json.toString())
     }
 }
 
