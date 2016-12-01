@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import socket
-
+improt json
 import time
 
 RECV_SIZE = 4096
@@ -83,7 +83,7 @@ def main():
         "Value": watches
     })
     entry_list.append(entry)
-    print(entry_list)
+    print(json.dumps(entry_list))
 
 
 if __name__ == "__main__":
