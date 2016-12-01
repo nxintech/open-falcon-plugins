@@ -1,15 +1,13 @@
-#!/bin/env groovy
-
-/**
- * Created on 2016/4/7.
- * author web
- * 需要groovy 解释器
- * 需要在JVM上开启JMX远程访问
- */
+#!/usr/local/env groovy
 
 import javax.management.remote.JMXConnectorFactory
 import javax.management.remote.JMXServiceURL
 import groovy.json.JsonBuilder
+
+/**
+ * Created on 2016/4/7.
+ * author web
+ */
 
 
 class Mbean {
@@ -48,15 +46,16 @@ class Mbean {
 class JavaLangMbean extends Mbean {
     String metricPrefix = "jvm"
     String cls = "java.lang"
-    // one open-falcon data pushed to transfer is a entry
+
+    JavaLangMbean(ip, port) { super(ip, port) }
+
+    // A entry is the data that pushed to open-falcon transfer
     def entry = [
             hostname : InetAddress.getLocalHost().getHostName(),
             timestamp: new Date().getTime().intdiv(1000),
             step     : 60
     ]
     def entryList = []
-
-    JavaLangMbean(ip, port) { super(ip, port) }
 
     // add Threading info from mbean to entryList
     def getThreading() {
@@ -124,14 +123,18 @@ class JavaLangMbean extends Mbean {
     def dumpEntryList() {
         def json = new JsonBuilder()
         json.call(entryList)
-        println(json.toString())
+        println(json.toPrettyString())
     }
 }
 
 
 trait CatalinaMbean {
     private String _cls = "Catalina"
-    String name = "\"http-nio-8080\""
+    String name = "\"http-bio-8080\""
+
+    def setThreadPoolName(name) {
+        this.name = name
+    }
 
     def getThreadingPool() {
         def type = "ThreadPool"
@@ -171,14 +174,27 @@ trait CatalinaMbean {
 
 
 class Jdk7MBean extends JavaLangMbean implements CatalinaMbean {
+    // jdk 版本小于 7u69
+
     String EdenSpace = "Eden Space"
     String SurvivorSpace = "Survivor Space"
     String TenuredGen = "Tenured Gen"
     String PermGen = "Perm Gen"
     String CodeCache = "Code Cache"
     def zones = [EdenSpace, SurvivorSpace, TenuredGen, PermGen, CodeCache]
-    
+
     Jdk7MBean(ip, port) { super(ip, port) }
+}
+
+class Jdk7u69PlusMBean extends JavaLangMbean implements CatalinaMbean {
+    String EdenSpace = "PS Eden Space"
+    String SurvivorSpace = "PS Survivor Space"
+    String TenuredGen = "PS Old Gen"
+    String PermGen = "PS Perm Gen"
+    String CodeCache = "Code Cache"
+    def zones = [EdenSpace, SurvivorSpace, TenuredGen, PermGen, CodeCache]
+
+    Jdk7u69PlusMBean(ip, port) { super(ip, port) }
 }
 
 class Jdk8MBean extends JavaLangMbean implements CatalinaMbean {
@@ -197,33 +213,38 @@ class Jdk8MBean extends JavaLangMbean implements CatalinaMbean {
 }
 
 
-def createJdkMbean(ip, port) {
-    def jdkVersion = System.getProperty("java.specification.version")
-    def ret
-    if (jdkVersion == "1.7") {
-        ret = new Jdk7MBean(ip, port)
-    } else if (jdkVersion == "1.8") {
-        ret = new Jdk8MBean(ip, port)
+static def createJdkMbean(ip, port) {
+    // port:JXM port
+    def jdkVersion = System.getProperty("java.version")
+    def mb
+    if (jdkVersion.startsWith("1.7")) {
+        // 获取jdk小版本号 1.7.0_69 -> 69
+        def smallVersion = jdkVersion.tokenize('.')[-1].tokenize('_')[-1].toInteger()
+        mb = (smallVersion >= 69)? new Jdk7u69PlusMBean(ip, port) : new Jdk7MBean(ip, port)
+    } else if (jdkVersion.startsWith("1.8")) {
+        mb = new Jdk8MBean(ip, port)
+        // jdk 1.8 use nio instead of bio
+        mb.setThreadPoolName("\"http-nio-8080\"")
     }
-    assert ret != null
-    ret
+    assert mb != null
+    mb
 }
 
 // main
-def main() {
-    def jmb = createJdkMbean("localhost", 10053)
+static def main() {
+    def mb = createJdkMbean("localhost", 10053)
 
     // jvm monitor info
-    jmb.getThreading()
-    jmb.getMemory()
-    jmb.getMemoryPool()
+    mb.getThreading()
+    mb.getMemory()
+    mb.getMemoryPool()
 
     // Catalina monitor info
-    jmb.getThreadingPool()
-    jmb.getGlobalRequestProcessor()
+    mb.getThreadingPool()
+    mb.getGlobalRequestProcessor()
 
     // dump to stdout
-    jmb.dumpEntryList()
+    mb.dumpEntryList()
 }
 
 main()
