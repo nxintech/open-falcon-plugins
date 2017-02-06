@@ -2,6 +2,7 @@
 import time
 import socket
 import requests
+import json
 
 # change below in your environment
 manager_host = ''
@@ -93,4 +94,4 @@ if __name__ == '__main__':
             # pass this monitor queue
             continue
         falcon_push_data(result, queue)
-    print(result)
+    print(json.dumps(result))
