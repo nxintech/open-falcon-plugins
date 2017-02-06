@@ -45,12 +45,20 @@ def falcon_push_data(entries, queue_data):
         "Value": 1 if queue_data['state'] == 'running' else 0
     }))
 
-    # deliver: Count of messages delivered in acknowledgement mode to consumers.
+    # publish: Count of messages published.
     entries.append(new_entry({
         "CounterType": "GAUGE",
-        "Metric": "rabbit.queue.message_stats.deliver,",
+        "Metric": "rabbit.queue.message_stats.publish,",
         "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
-        "Value": message_stats['deliver']
+        "Value": message_stats['publish']
+    }))
+
+    # confirm: Count of messages confirmed.
+    entries.append(new_entry({
+        "CounterType": "GAUGE",
+        "Metric": "rabbit.queue.message_stats.confirm,",
+        "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
+        "Value": message_stats['confirm']
     }))
 
     # deliver: Count of messages delivered in acknowledgement mode to consumers.
