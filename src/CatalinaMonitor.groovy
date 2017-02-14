@@ -153,9 +153,20 @@ trait CatalinaMbean {
     def GlobalRequestProcessor() {
         def type = "GlobalRequestProcessor"
         def name = "$domain:type=$type,name=$protocolHandler"
-        ["bytesReceived", "bytesSent", "errorCount", "requestCount"].each {
+        ["bytesReceived", "bytesSent"].each {
             entryList.add([
                     CounterType: "COUNTER",
+                    Endpoint   : hostname,
+                    Timestamp  : timestamp,
+                    Step       : step,
+                    TAGS       : "domain=$domain,type=$type,name=$it",
+                    Metric     : combine(domain, type, it),
+                    Value      : getAttribute(name, it)
+            ])
+        }
+        ["errorCount", "requestCount"].each {
+            entryList.add([
+                    CounterType: "GAUGE",
                     Endpoint   : hostname,
                     Timestamp  : timestamp,
                     Step       : step,
