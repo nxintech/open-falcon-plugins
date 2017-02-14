@@ -1,2 +1,2 @@
 #!/bin/sh
-groovy -cp src 60_tomcat.groovy
+groovy -cp src tomcat.groovy
