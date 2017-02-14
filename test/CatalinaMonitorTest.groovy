@@ -13,7 +13,7 @@ import CatalinaMonitor
 
 @RunWith(JUnit4.class)
 class CatalinaMonitorTest extends GroovyTestCase {
-    CatalinaMonitor cm = new CatalinaMonitor("10.211.18.5", 10053)
+    CatalinaMonitor cm = new CatalinaMonitor("localhost", 10053)
 
     @After
     void prettyPrint() {
