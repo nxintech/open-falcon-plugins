@@ -22,6 +22,12 @@ run test from commandline
 groovy -cp .\src test\CatalinaMonitorTest.groovy dump
 ```
 
+run golang json unmarshal test
+```
+go test test\jsonformat_test.go -v
+```
+
+
 tomcat 收集结果展示
 ```
 [
