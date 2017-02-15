@@ -198,7 +198,7 @@ class JvmMonitor {
 
     JvmMonitor(String host, int port) {
         hostname = InetAddress.getLocalHost().getHostName()
-        timestamp = new Date().getTime().intdiv(1000).toString()
+        timestamp = new Date().getTime().intdiv(1000)
         step = 60
         serverConnection = JMXConnectorFactory.connect(new JMXServiceURL("service:jmx:rmi:///jndi/rmi://$host:$port/jmxrmi")).MBeanServerConnection
     }
