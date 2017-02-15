@@ -187,7 +187,7 @@ trait CatalinaMbean {
 class JvmMonitor {
     protected MBeanServerConnection serverConnection
     protected final String hostname
-    protected final String timestamp
+    protected final int timestamp
     protected final int step
 
     static getPercent(numerator, denominator) {
