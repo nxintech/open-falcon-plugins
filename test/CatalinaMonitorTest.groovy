@@ -1,7 +1,6 @@
 import org.junit.Test
 import org.junit.After
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import org.junit.Assert
 import groovy.json.JsonBuilder
 import CatalinaMonitor
 
@@ -11,22 +10,20 @@ import CatalinaMonitor
  */
 
 
-@RunWith(JUnit4.class)
-class CatalinaMonitorTest extends GroovyTestCase {
+class CatalinaMonitorTest {
     CatalinaMonitor cm = new CatalinaMonitor("localhost", 10053)
 
-    @After
+//    @After
     void prettyPrint() {
         def json = new JsonBuilder()
         json.call(cm.entryList)
-        println("beginning dump data ...")
         print(json.toPrettyString())
     }
 
     @Test
     void getAttribute() {
         def vmName = cm.getAttribute("java.lang:type=Runtime", "VmName")
-        assertEquals(vmName, "Java HotSpot(TM) 64-Bit Server VM")
+        Assert.assertEquals(vmName, "Java HotSpot(TM) 64-Bit Server VM")
     }
 
     /**
@@ -72,5 +69,11 @@ class CatalinaMonitorTest extends GroovyTestCase {
     void fetchAll() {
         cm.javalangFetchAll()
         cm.catalinaFetchALL()
+    }
+
+    @Test
+    void dump() {
+        fetchAll()
+        cm.dumpEntryList()
     }
 }

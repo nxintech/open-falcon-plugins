@@ -17,6 +17,11 @@ JVM options, rmi.port 可以不写
 -Dcom.sun.management.jmxremote.authenticate=false
 ```
 
+run test from commandline
+```
+groovy -cp .\src test\CatalinaMonitorTest.groovy dump
+```
+
 tomcat 收集结果展示
 ```
 [
