@@ -62,29 +62,39 @@ def falcon_push_data(entries, queue_data):
         "Value": message_stats['confirm']
     }))
 
-    # deliver: Count of messages delivered in acknowledgement mode to consumers.
-    entries.append(new_entry({
-        "CounterType": "GAUGE",
-        "Metric": "rabbit.queue.message_stats.deliver,",
-        "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
-        "Value": message_stats['deliver']
-    }))
+    # not every queue has deliver / get / deliver_get
+    try:
+        # deliver: Count of messages delivered in acknowledgement mode to consumers.
+        entries.append(new_entry({
+            "CounterType": "GAUGE",
+            "Metric": "rabbit.queue.message_stats.deliver,",
+            "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
+            "Value": message_stats['deliver']
+        }))
+    except KeyError:
+        pass
 
-    # get: Count of messages delivered in acknowledgement mode in response to basic.get.
-    entries.append(new_entry({
-        "CounterType": "GAUGE",
-        "Metric": "rabbit.queue.message_stats.get,",
-        "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
-        "Value": message_stats['get']
-    }))
+    try:
+        # get: Count of messages delivered in acknowledgement mode in response to basic.get.
+        entries.append(new_entry({
+            "CounterType": "GAUGE",
+            "Metric": "rabbit.queue.message_stats.get,",
+            "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
+            "Value": message_stats['get']
+        }))
+    except KeyError:
+        pass
 
-    # deliver_get :Sum four of deliver/deliver_noack and get/get_noack
-    entries.append(new_entry({
-        "CounterType": "GAUGE",
-        "Metric": "rabbit.queue.message_stats.deliver_get,",
-        "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
-        "Value": message_stats['deliver_get']
-    }))
+    try:
+        # deliver_get :Sum four of deliver/deliver_noack and get/get_noack
+        entries.append(new_entry({
+            "CounterType": "GAUGE",
+            "Metric": "rabbit.queue.message_stats.deliver_get,",
+            "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
+            "Value": message_stats['deliver_get']
+        }))
+    except KeyError:
+        pass
 
 
 if __name__ == '__main__':
