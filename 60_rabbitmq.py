@@ -36,8 +36,11 @@ def list_queue():
 
 def falcon_push_data(entries, queue_data):
     queue_name = queue_data['name']
-    message_stats = queue_data['message_stats']
-
+    try:
+        message_stats = queue_data['message_stats']
+    except KeyError:
+        return
+    
     # 'running' is 1
     entries.append(new_entry({
         "CounterType": "GAUGE",
