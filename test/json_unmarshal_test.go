@@ -8,7 +8,7 @@ import (
 	"bytes"
 )
 
-func TestUnmarshal(t *testing.T) {
+func TestCatalinaMonitorUnmarshal(t *testing.T) {
 	out, err := exec.Command("groovy", "-cp", "..\\src", "CatalinaMonitorTest.groovy", "dump").Output()
 	if err != nil {
 		t.Error(err)

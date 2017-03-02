@@ -14,7 +14,6 @@ Entry = {
 
 
 def per_cpu_data():
-    switches = None
     result = []
     with open('/proc/stat') as f:
         for line in f.readlines():
