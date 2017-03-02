@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/bin/env python
 # -*- coding:utf-8 -*-
 
 import socket
-improt json
+import json
 import time
 
 RECV_SIZE = 4096
