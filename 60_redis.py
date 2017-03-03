@@ -3,6 +3,7 @@
 
 import os
 import time
+import json
 import redis
 import socket
 
@@ -64,7 +65,12 @@ def redis_metric(result, port):
     # hit
     keyspace_hits = int(info['keyspace_hits'])
     keyspace_misses = int(info['keyspace_misses'])
-    keyspace_hit_ratio = keyspace_hits / (keyspace_hits + keyspace_misses) * 100
+    keyspace_total = keyspace_hits + keyspace_misses
+    if keyspace_total == 0:
+        keyspace_hit_ratio = 0
+    else:
+        keyspace_hit_ratio = keyspace_hits / (keyspace_hits + keyspace_misses) * 100
+    result.append(guage('keyspace_hits', keyspace_hits))
     result.append(guage('keyspace_hit_ratio', keyspace_hit_ratio))
 
     # network
@@ -91,4 +97,4 @@ if __name__ == "__main__":
     for f in os.listdir('/etc/redis'):
         port = f.split('.')[0].split('-')[-1]
         redis_metric(result, port)
-    print result
+    print(json.dumps(result))
