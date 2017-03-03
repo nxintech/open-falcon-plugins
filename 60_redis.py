@@ -67,14 +67,11 @@ def redis_metric(result, port):
     keyspace_hit_ratio = keyspace_hits / (keyspace_hits + keyspace_misses) * 100
     result.append(guage('keyspace_hit_ratio', keyspace_hit_ratio))
 
-
     # network
     result.append(guage('instantaneous_input_kbps', info['instantaneous_input_kbps']))
     result.append(guage('instantaneous_output_kbps', info['instantaneous_output_kbps']))
 
-
     # commands
-
     result.append(guage('instantaneous_ops_per_sec', info['instantaneous_ops_per_sec']))
     result.append(count('total_commands_processed', info['total_commands_processed']))
 
@@ -87,6 +84,7 @@ def redis_metric(result, port):
     if role == 'slave':
         master_link_status = 1 if info['master_link_status'] == 'up' else 0
         result.append(guage('master_link_status', master_link_status))
+
 
 if __name__ == "__main__":
     result = []
