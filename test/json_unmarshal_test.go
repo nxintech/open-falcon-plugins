@@ -1,13 +1,14 @@
 package test
 
 import (
+	"path"
+	"bytes"
 	"testing"
 	"strings"
-	"bytes"
 	"os/exec"
+	"path/filepath"
 	"encoding/json"
 	"github.com/open-falcon/common/model"
-	
 )
 
 func TestCatalinaMonitorUnmarshal(t *testing.T) {
