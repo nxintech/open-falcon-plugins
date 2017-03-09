@@ -17,6 +17,9 @@ JVM options, rmi.port 可以不写
 -Dcom.sun.management.jmxremote.authenticate=false
 ```
 
+## test
+install groovy first
+
 run test from commandline
 ```
 groovy -cp .\src test\CatalinaMonitorTest.groovy dump
@@ -24,7 +27,8 @@ groovy -cp .\src test\CatalinaMonitorTest.groovy dump
 
 run golang json unmarshal test
 ```
-go test test\jsonformat_test.go -v
+go get github.com/open-falcon/common/model
+go test test\json_unmarshal_test.go -v
 ```
 
 
