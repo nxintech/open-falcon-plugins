@@ -2,14 +2,32 @@ package test
 
 import (
 	"testing"
+	"strings"
+	"bytes"
 	"os/exec"
 	"encoding/json"
 	"github.com/open-falcon/common/model"
-	"bytes"
+	
 )
 
 func TestCatalinaMonitorUnmarshal(t *testing.T) {
-	out, err := exec.Command("groovy", "-cp", "..\\src", "CatalinaMonitorTest.groovy", "dump").Output()
+	/*
+	 go1.8 go test use a temp dir for testing
+	 wo shold set TMPDIR environment variable before running "go test".
+	 the working path will be like $TMPDIR/go-build879888304/command-line-arguments/_test
+	*/
+	
+	// get test working dir
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		t.Error(err)
+	}
+	slice := strings.Split(dir, "/")
+	length := len(slice)
+	tmpdir := strings.Join(slice[0: length - 3], "/")
+	// t.Log(tmpdir)
+	
+	out, err := exec.Command("groovy", "-cp", path.Join(tmpdir, "src"), path.Join(tmpdir, "test", "CatalinaMonitorTest.groovy"), "dump").Output()
 	if err != nil {
 		t.Error(err)
 	}
