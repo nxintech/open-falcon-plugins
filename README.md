@@ -25,6 +25,10 @@ run test from commandline
 groovy -cp .\src test\CatalinaMonitorTest.groovy dump
 ```
 
+set TMPDIR environment before run test
+```
+export TMPDIR=`pwd`
+```
 run golang json unmarshal test
 ```
 go get github.com/open-falcon/common/model
