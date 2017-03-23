@@ -48,7 +48,7 @@ def cpu_metric():
     for n_metric, o_metric in izip(new_cpu_metrics, old_cpu_metrics):
         name = o_metric.pop()
         if name != n_metric.pop():
-            raise ValueError('cpu not match')
+            raise ValueError('cpu index not match')
         user, nice, system, idle, iowait, irq, softirq, steal, guest = map(sub, n_metric, o_metric)
         result.append(guage("{0}.user".format(name), user))
         result.append(guage("{0}.nice".format(name), nice))
