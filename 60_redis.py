@@ -6,6 +6,7 @@ import time
 import json
 import redis
 import socket
+import re
 
 # alert
 # mem_fragmentation_ratio < 1  : use swap
@@ -95,6 +96,9 @@ def redis_metric(result, port):
 if __name__ == "__main__":
     result = []
     for f in os.listdir('/etc/redis'):
-        port = f.split('.')[0].split('-')[-1]
-        redis_metric(result, port)
+        rerz = re.findall('redis-(\d+).conf',f)
+        if rerz:
+            port = rerz[0]
+            redis_metric(result, port)
+
     print(json.dumps(result))
