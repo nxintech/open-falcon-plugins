@@ -177,7 +177,7 @@ trait CatalinaMbean {
         }
     }
 
-    def catalinaFetchALL() {
+    def catalinaFetchAll() {
         ThreadPool()
         GlobalRequestProcessor()
     }

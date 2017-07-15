@@ -1,5 +1,4 @@
 import org.junit.Test
-import org.junit.After
 import org.junit.Assert
 import groovy.json.JsonBuilder
 import CatalinaMonitor
@@ -68,7 +67,7 @@ class CatalinaMonitorTest {
     @Test
     void fetchAll() {
         cm.javalangFetchAll()
-        cm.catalinaFetchALL()
+        cm.catalinaFetchAll()
     }
 
     @Test
