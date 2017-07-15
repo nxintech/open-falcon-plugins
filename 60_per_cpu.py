@@ -1,5 +1,9 @@
 #!/bin/env python
 # -*- coding:utf-8 -*-
+
+# open-falcon only collect CPU summary infomation
+# this scirpt just collect each CPU infomation
+
 import time
 import json
 import socket
