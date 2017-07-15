@@ -1,10 +1,10 @@
 #!/bin/env python
 # -*- coding:utf-8 -*-
 
-import socket
 import time
-from itertools import izip
 import json
+import socket
+from itertools import izip
 from os import popen as bash
 
 
@@ -157,5 +157,5 @@ if __name__ == "__main__":
         mc = MemcacheClient((host, (port)), timeout=5)
         mget_stats()
         mget_slabs()
-    print json.dumps(entry_list)
+    print(json.dumps(entry_list))
 
