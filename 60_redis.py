@@ -84,7 +84,11 @@ def redis_metric(result, port):
 
     # save
     rdb_last_bgsave_status = 1 if info['rdb_last_bgsave_status'] == 'ok' else 0
+    aof_last_bgrewrite_status = 1 if info["aof_last_bgrewrite_status"] == 'ok' else 0
+    aof_last_write_status = 1 if info["aof_last_write_status"] == 'ok' else 0
     result.append(guage('rdb_last_bgsave_status', rdb_last_bgsave_status))
+    result.append(guage('aof_last_bgrewrite_status', aof_last_bgrewrite_status))
+    result.append(guage('aof_last_write_status', aof_last_write_status))
 
     # repl
     role = info['role']
@@ -96,7 +100,7 @@ def redis_metric(result, port):
 if __name__ == "__main__":
     result = []
     for f in os.listdir('/etc/redis'):
-        rerz = re.findall('redis-(\d+).conf',f)
+        rerz = re.findall('redis-(\d+).conf', f)
         if rerz:
             port = rerz[0]
             redis_metric(result, port)
