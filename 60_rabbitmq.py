@@ -53,7 +53,7 @@ def falcon_push_data(entries, queue_data):
     # publish: Count of messages published.
     entries.append(new_entry({
         "CounterType": "GAUGE",
-        "Metric": "rabbit.queue.message_stats.publish,",
+        "Metric": "rabbit.queue.message_stats.publish",
         "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
         "Value": message_stats['publish']
     }))
@@ -61,7 +61,7 @@ def falcon_push_data(entries, queue_data):
     # confirm: Count of messages confirmed.
     entries.append(new_entry({
         "CounterType": "GAUGE",
-        "Metric": "rabbit.queue.message_stats.confirm,",
+        "Metric": "rabbit.queue.message_stats.confirm",
         "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
         "Value": message_stats['confirm']
     }))
@@ -71,7 +71,7 @@ def falcon_push_data(entries, queue_data):
         # deliver: Count of messages delivered in acknowledgement mode to consumers.
         entries.append(new_entry({
             "CounterType": "GAUGE",
-            "Metric": "rabbit.queue.message_stats.deliver,",
+            "Metric": "rabbit.queue.message_stats.deliver",
             "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
             "Value": message_stats['deliver']
         }))
@@ -82,7 +82,7 @@ def falcon_push_data(entries, queue_data):
         # get: Count of messages delivered in acknowledgement mode in response to basic.get.
         entries.append(new_entry({
             "CounterType": "GAUGE",
-            "Metric": "rabbit.queue.message_stats.get,",
+            "Metric": "rabbit.queue.message_stats.get",
             "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
             "Value": message_stats['get']
         }))
@@ -93,7 +93,7 @@ def falcon_push_data(entries, queue_data):
         # deliver_get :Sum four of deliver/deliver_noack and get/get_noack
         entries.append(new_entry({
             "CounterType": "GAUGE",
-            "Metric": "rabbit.queue.message_stats.deliver_get,",
+            "Metric": "rabbit.queue.message_stats.deliver_get",
             "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
             "Value": message_stats['deliver_get']
         }))
