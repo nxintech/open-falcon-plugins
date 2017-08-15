@@ -12,6 +12,9 @@ import re
 # mem_fragmentation_ratio < 1  : use swap
 # rdb_last_bgsave_status = 0
 # master_link_status = 0
+# aof_last_bgrewrite_status = 0
+# aof_last_write_status = 0
+
 
 
 Entry = {
