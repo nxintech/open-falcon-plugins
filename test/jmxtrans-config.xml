@@ -4,119 +4,119 @@
     
     <queries>
     <!-- JVM -->
-    	<query objectName="java.lang:type=OperatingSystem" attribute="ProcessCpuLoad" resultAlias="jvm.java.lang.OperatingSystem.ProcessCpuLoad" type="GAUGE"/>
-		<query objectName="java.lang:type=ClassLoading" attribute="LoadedClassCount" resultAlias="jvm.java.lang.ClassLoading.LoadedClassCount" type="GAUGE"/>
+        <query objectName="java.lang:type=OperatingSystem" attribute="ProcessCpuLoad" resultAlias="jvm.java.lang.OperatingSystem.ProcessCpuLoad" type="GAUGE"/>
+        <query objectName="java.lang:type=ClassLoading" attribute="LoadedClassCount" resultAlias="jvm.java.lang.ClassLoading.LoadedClassCount" type="GAUGE"/>
 
-		<!-- Threading -->
-		<query objectName="java.lang:type=Threading" attribute="ThreadCount" resultAlias="jvm.java.lang.Threading.ThreadCount" type="GAUGE"/>
-		<query objectName="java.lang:type=Threading" attribute="PeakThreadCount" resultAlias="jvm.java.lang.Threading.PeakThreadCount" type="GAUGE"/>
+        <!-- Threading -->
+        <query objectName="java.lang:type=Threading" attribute="ThreadCount" resultAlias="jvm.java.lang.Threading.ThreadCount" type="GAUGE"/>
+        <query objectName="java.lang:type=Threading" attribute="PeakThreadCount" resultAlias="jvm.java.lang.Threading.PeakThreadCount" type="GAUGE"/>
 
-		<!-- Memory -->
-		<query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="used" resultAlias="jvm.java.lang.Memory.HeapMemoryUsage.used" type="GAUGE"/>
-		<query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="max" resultAlias="jvm.java.lang.Memory.HeapMemoryUsage.max" type="GAUGE"/>
-		<query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="used" resultAlias="jvm.java.lang.Memory.NonHeapMemoryUsage.used" type="GAUGE"/>
-		<query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="max" resultAlias="jvm.java.lang.Memory.NonHeapMemoryUsage.max" type="GAUGE"/>
+        <!-- Memory -->
+        <query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="used" resultAlias="jvm.java.lang.Memory.HeapMemoryUsage.used" type="GAUGE"/>
+        <query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="max" resultAlias="jvm.java.lang.Memory.HeapMemoryUsage.max" type="GAUGE"/>
+        <query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="used" resultAlias="jvm.java.lang.Memory.NonHeapMemoryUsage.used" type="GAUGE"/>
+        <query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="max" resultAlias="jvm.java.lang.Memory.NonHeapMemoryUsage.max" type="GAUGE"/>
 
-		<!-- MemoryPool -->
-		<query objectName="java.lang:type=MemoryPool,name=Code Cache" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.CodeCache.used" type="GAUGE"/>
-		<query objectName="java.lang:type=MemoryPool,name=Code Cache" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.CodeCache.max" type="GAUGE"/>
-		<query objectName="java.lang:type=MemoryPool,name=Compressed Class Space" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.CompressedClassSpace.used" type="GAUGE"/>
-		<query objectName="java.lang:type=MemoryPool,name=Compressed Class Space" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.CompressedClassSpace.max" type="GAUGE"/>
-		<query objectName="java.lang:type=MemoryPool,name=PS Eden Space" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.PSEdenSpace.used" type="GAUGE"/>
-		<query objectName="java.lang:type=MemoryPool,name=PS Eden Space" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.PSEdenSpace.max" type="GAUGE"/>
-		<query objectName="java.lang:type=MemoryPool,name=PS Survivor Space" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.PSSurvivorSpace.used" type="GAUGE"/>
-		<query objectName="java.lang:type=MemoryPool,name=PS Survivor Space" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.PSSurvivorSpace.max" type="GAUGE"/>
-		<query objectName="java.lang:type=MemoryPool,name=PS Old Gen" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.PSOldGen.used" type="GAUGE"/>
-		<query objectName="java.lang:type=MemoryPool,name=PS Old Gen" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.PSOldGen.max" type="GAUGE"/>
-		<!-- PS Perm Gen for jdk7, Metaspace for jdk8 -->
-		<query objectName="java.lang:type=MemoryPool,name=Metaspace" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.Metaspace.used" type="GAUGE"/>
-		<query objectName="java.lang:type=MemoryPool,name=Metaspace" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.Metaspace.max" type="GAUGE"/>
-		<query objectName="java.lang:type=MemoryPool,name=PS Perm Gen" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.PSPermGen.used" type="GAUGE"/>
-		<query objectName="java.lang:type=MemoryPool,name=PS Perm Gen" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.PSPermGen.max" type="GAUGE"/>
+        <!-- MemoryPool -->
+        <query objectName="java.lang:type=MemoryPool,name=Code Cache" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.CodeCache.used" type="GAUGE"/>
+        <query objectName="java.lang:type=MemoryPool,name=Code Cache" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.CodeCache.max" type="GAUGE"/>
+        <query objectName="java.lang:type=MemoryPool,name=Compressed Class Space" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.CompressedClassSpace.used" type="GAUGE"/>
+        <query objectName="java.lang:type=MemoryPool,name=Compressed Class Space" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.CompressedClassSpace.max" type="GAUGE"/>
+        <query objectName="java.lang:type=MemoryPool,name=PS Eden Space" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.PSEdenSpace.used" type="GAUGE"/>
+        <query objectName="java.lang:type=MemoryPool,name=PS Eden Space" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.PSEdenSpace.max" type="GAUGE"/>
+        <query objectName="java.lang:type=MemoryPool,name=PS Survivor Space" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.PSSurvivorSpace.used" type="GAUGE"/>
+        <query objectName="java.lang:type=MemoryPool,name=PS Survivor Space" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.PSSurvivorSpace.max" type="GAUGE"/>
+        <query objectName="java.lang:type=MemoryPool,name=PS Old Gen" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.PSOldGen.used" type="GAUGE"/>
+        <query objectName="java.lang:type=MemoryPool,name=PS Old Gen" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.PSOldGen.max" type="GAUGE"/>
+        <!-- PS Perm Gen for jdk7, Metaspace for jdk8 -->
+        <query objectName="java.lang:type=MemoryPool,name=Metaspace" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.Metaspace.used" type="GAUGE"/>
+        <query objectName="java.lang:type=MemoryPool,name=Metaspace" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.Metaspace.max" type="GAUGE"/>
+        <query objectName="java.lang:type=MemoryPool,name=PS Perm Gen" attribute="Usage" key="used" resultAlias="jvm.java.lang.MemoryPool.PSPermGen.used" type="GAUGE"/>
+        <query objectName="java.lang:type=MemoryPool,name=PS Perm Gen" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.PSPermGen.max" type="GAUGE"/>
 
-		<!-- GarbageCollector -->
-		<query objectName="java.lang:type=GarbageCollector,name=PS MarkSweep" attribute="CollectionCount" resultAlias="jvm.java.lang.MemoryPool.PSMarkSweep.CollectionCount" type="GAUGE"/>
-		<query objectName="java.lang:type=GarbageCollector,name=PS MarkSweep" attribute="CollectionTime" resultAlias="jvm.java.lang.MemoryPool.PSMarkSweep.CollectionTime" type="GAUGE"/>
-		<query objectName="java.lang:type=GarbageCollector,name=PS Scavenge" attribute="CollectionCount" resultAlias="jvm.java.lang.MemoryPool.PSScavenge.CollectionCount" type="GAUGE"/>
-		<query objectName="java.lang:type=GarbageCollector,name=PS Scavenge" attribute="CollectionTime" resultAlias="jvm.java.lang.MemoryPool.PSScavenge.CollectionTime" type="GAUGE"/>	
+        <!-- GarbageCollector -->
+        <query objectName="java.lang:type=GarbageCollector,name=PS MarkSweep" attribute="CollectionCount" resultAlias="jvm.java.lang.MemoryPool.PSMarkSweep.CollectionCount" type="GAUGE"/>
+        <query objectName="java.lang:type=GarbageCollector,name=PS MarkSweep" attribute="CollectionTime" resultAlias="jvm.java.lang.MemoryPool.PSMarkSweep.CollectionTime" type="GAUGE"/>
+        <query objectName="java.lang:type=GarbageCollector,name=PS Scavenge" attribute="CollectionCount" resultAlias="jvm.java.lang.MemoryPool.PSScavenge.CollectionCount" type="GAUGE"/>
+        <query objectName="java.lang:type=GarbageCollector,name=PS Scavenge" attribute="CollectionTime" resultAlias="jvm.java.lang.MemoryPool.PSScavenge.CollectionTime" type="GAUGE"/>    
 
-    <!-- Catalina -->	
-		<!-- ThreadPool -->
-		<query objectName="Catalina:type=ThreadPool,name=&quot;http-nio-8080&quot;" attribute="connectionCount" resultAlias="jvm.Catalina.ThreadPool.connectionCount" type="GAUGE"/>
-		<query objectName="Catalina:type=ThreadPool,name=&quot;http-nio-8080&quot;" attribute="currentThreadCount" resultAlias="jvm.Catalina.ThreadPool.currentThreadCount" type="GAUGE"/>
-		<query objectName="Catalina:type=ThreadPool,name=&quot;http-nio-8080&quot;" attribute="currentThreadsBusy" resultAlias="jvm.Catalina.ThreadPool.currentThreadsBusy" type="GAUGE"/>
-		<query objectName="Catalina:type=ThreadPool,name=&quot;http-bio-8080&quot;" attribute="connectionCount" resultAlias="jvm.Catalina.ThreadPool.connectionCount" type="GAUGE"/>
-		<query objectName="Catalina:type=ThreadPool,name=&quot;http-bio-8080&quot;" attribute="currentThreadCount" resultAlias="jvm.Catalina.ThreadPool.currentThreadCount" type="GAUGE"/>
-		<query objectName="Catalina:type=ThreadPool,name=&quot;http-bio-8080&quot;" attribute="currentThreadsBusy" resultAlias="jvm.Catalina.ThreadPool.currentThreadsBusy" type="GAUGE"/>
-		<!-- GlobalRequestProcessor -->
-		<query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-nio-8080&quot;" attribute="bytesReceived" resultAlias="jvm.Catalina.GlobalRequestProcessor.bytesReceived" type="COUNTER"/>
-		<query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-nio-8080&quot;" attribute="bytesSent" resultAlias="jvm.Catalina.GlobalRequestProcessor.bytesSent" type="COUNTER"/>
-		<query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-nio-8080&quot;" attribute="errorCount" resultAlias="jvm.Catalina.GlobalRequestProcessor.errorCount" type="COUNTER"/>
-		<query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-nio-8080&quot;" attribute="requestCount" resultAlias="jvm.Catalina.GlobalRequestProcessor.requestCount" type="COUNTER"/>
-		<query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-bio-8080&quot;" attribute="bytesReceived" resultAlias="jvm.Catalina.GlobalRequestProcessor.bytesReceived" type="COUNTER"/>
-		<query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-bio-8080&quot;" attribute="bytesSent" resultAlias="jvm.Catalina.GlobalRequestProcessor.bytesSent" type="COUNTER"/>
-		<query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-bio-8080&quot;" attribute="errorCount" resultAlias="jvm.Catalina.GlobalRequestProcessor.errorCount" type="COUNTER"/>
-		<query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-bio-8080&quot;" attribute="requestCount" resultAlias="jvm.Catalina.GlobalRequestProcessor.requestCount" type="COUNTER"/>
+    <!-- Catalina -->    
+        <!-- ThreadPool -->
+        <query objectName="Catalina:type=ThreadPool,name=&quot;http-nio-8080&quot;" attribute="connectionCount" resultAlias="jvm.Catalina.ThreadPool.connectionCount" type="GAUGE"/>
+        <query objectName="Catalina:type=ThreadPool,name=&quot;http-nio-8080&quot;" attribute="currentThreadCount" resultAlias="jvm.Catalina.ThreadPool.currentThreadCount" type="GAUGE"/>
+        <query objectName="Catalina:type=ThreadPool,name=&quot;http-nio-8080&quot;" attribute="currentThreadsBusy" resultAlias="jvm.Catalina.ThreadPool.currentThreadsBusy" type="GAUGE"/>
+        <query objectName="Catalina:type=ThreadPool,name=&quot;http-bio-8080&quot;" attribute="connectionCount" resultAlias="jvm.Catalina.ThreadPool.connectionCount" type="GAUGE"/>
+        <query objectName="Catalina:type=ThreadPool,name=&quot;http-bio-8080&quot;" attribute="currentThreadCount" resultAlias="jvm.Catalina.ThreadPool.currentThreadCount" type="GAUGE"/>
+        <query objectName="Catalina:type=ThreadPool,name=&quot;http-bio-8080&quot;" attribute="currentThreadsBusy" resultAlias="jvm.Catalina.ThreadPool.currentThreadsBusy" type="GAUGE"/>
+        <!-- GlobalRequestProcessor -->
+        <query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-nio-8080&quot;" attribute="bytesReceived" resultAlias="jvm.Catalina.GlobalRequestProcessor.bytesReceived" type="COUNTER"/>
+        <query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-nio-8080&quot;" attribute="bytesSent" resultAlias="jvm.Catalina.GlobalRequestProcessor.bytesSent" type="COUNTER"/>
+        <query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-nio-8080&quot;" attribute="errorCount" resultAlias="jvm.Catalina.GlobalRequestProcessor.errorCount" type="COUNTER"/>
+        <query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-nio-8080&quot;" attribute="requestCount" resultAlias="jvm.Catalina.GlobalRequestProcessor.requestCount" type="COUNTER"/>
+        <query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-bio-8080&quot;" attribute="bytesReceived" resultAlias="jvm.Catalina.GlobalRequestProcessor.bytesReceived" type="COUNTER"/>
+        <query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-bio-8080&quot;" attribute="bytesSent" resultAlias="jvm.Catalina.GlobalRequestProcessor.bytesSent" type="COUNTER"/>
+        <query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-bio-8080&quot;" attribute="errorCount" resultAlias="jvm.Catalina.GlobalRequestProcessor.errorCount" type="COUNTER"/>
+        <query objectName="Catalina:type=GlobalRequestProcessor,name=&quot;http-bio-8080&quot;" attribute="requestCount" resultAlias="jvm.Catalina.GlobalRequestProcessor.requestCount" type="COUNTER"/>
 
     <!-- Kafka broker --> 
-		<query objectName="kafka.server:type=ReplicaManager,name=UnderReplicatedPartitions" attribute="Value" resultAlias="kafka.server.ReplicaManager.UnderReplicatedPartitions" type="GAUGE"/>
-		<query objectName="kafka.controller:type=KafkaController,name=OfflinePartitionsCount" attribute="Value" resultAlias="kafka.controller.KafkaController.OfflinePartitionsCount" type="GAUGE" />
-		<query objectName="kafka.controller:type=KafkaController,name=ActiveControllerCount" attribute="Value" resultAlias="kafka.controller.KafkaController.ActiveControllerCount" type="GAUGE" />
-		<query objectName="kafka.server:type=BrokerTopicMetrics,name=MessagesInPerSec" attribute="Count" resultAlias="kafka.server.BrokerTopicMetrics.MessagesInPerSec" type="GAUGE" />
-		<query objectName="kafka.server:type=BrokerTopicMetrics,name=MessagesOutPerSec" attribute="Count" resultAlias="kafka.server.BrokerTopicMetrics.MessagesOutPerSec" type="GAUGE" />
-		<query objectName="kafka.server:type=BrokerTopicMetrics,name=BytesInPerSec" attribute="Count" resultAlias="kafka.server.BrokerTopicMetrics.BytesInPerSec" type="GAUGE" />
-		<query objectName="kafka.server:type=BrokerTopicMetrics,name=BytesOutPerSec" attribute="Count" resultAlias="kafka.server.BrokerTopicMetrics.BytesOutPerSec" type="GAUGE" />
-		<query objectName="kafka.server:type=ReplicaManager,name=IsrShrinksPerSec" attribute="Count" resultAlias="kafka.server.ReplicaManager.IsrShrinksPerSec" type="GAUGE" />
-		<query objectName="kafka.server:type=ReplicaManager,name=IsrExpandsPerSec" attribute="Count" resultAlias="kafka.server.ReplicaManager.IsrExpandsPerSec" type="GAUGE" />
-	
-	<!- SpringBoot -->
-		
+        <query objectName="kafka.server:type=ReplicaManager,name=UnderReplicatedPartitions" attribute="Value" resultAlias="kafka.server.ReplicaManager.UnderReplicatedPartitions" type="GAUGE"/>
+        <query objectName="kafka.controller:type=KafkaController,name=OfflinePartitionsCount" attribute="Value" resultAlias="kafka.controller.KafkaController.OfflinePartitionsCount" type="GAUGE" />
+        <query objectName="kafka.controller:type=KafkaController,name=ActiveControllerCount" attribute="Value" resultAlias="kafka.controller.KafkaController.ActiveControllerCount" type="GAUGE" />
+        <query objectName="kafka.server:type=BrokerTopicMetrics,name=MessagesInPerSec" attribute="Count" resultAlias="kafka.server.BrokerTopicMetrics.MessagesInPerSec" type="GAUGE" />
+        <query objectName="kafka.server:type=BrokerTopicMetrics,name=MessagesOutPerSec" attribute="Count" resultAlias="kafka.server.BrokerTopicMetrics.MessagesOutPerSec" type="GAUGE" />
+        <query objectName="kafka.server:type=BrokerTopicMetrics,name=BytesInPerSec" attribute="Count" resultAlias="kafka.server.BrokerTopicMetrics.BytesInPerSec" type="GAUGE" />
+        <query objectName="kafka.server:type=BrokerTopicMetrics,name=BytesOutPerSec" attribute="Count" resultAlias="kafka.server.BrokerTopicMetrics.BytesOutPerSec" type="GAUGE" />
+        <query objectName="kafka.server:type=ReplicaManager,name=IsrShrinksPerSec" attribute="Count" resultAlias="kafka.server.ReplicaManager.IsrShrinksPerSec" type="GAUGE" />
+        <query objectName="kafka.server:type=ReplicaManager,name=IsrExpandsPerSec" attribute="Count" resultAlias="kafka.server.ReplicaManager.IsrExpandsPerSec" type="GAUGE" />
+    
+    <!- SpringBoot -->
+        
     <queries>
 
     <outputWriter class="org.jmxtrans.agent.openfalcon.OpenFalconHttpWriter">
         <url>http://localhost:1988/v1/push</url>
         <!-- 计算部分 -->
-		<aggregates>
-			<aggregate resultAlias="jvm.java.lang.Memory.HeapMemoryUsage.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
-			<queryResultKey>jvm.java.lang.Memory.HeapMemoryUsage.used</queryResultKey>
-			<queryResultKey>jvm.java.lang.Memory.HeapMemoryUsage.max</queryResultKey>
-	    </aggregate>
-			
-	    <aggregate resultAlias="jvm.java.lang.MemoryPool.CodeCache.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
-			<queryResultKey>jvm.java.lang.MemoryPool.CodeCache.used</queryResultKey>
-			<queryResultKey>jvm.java.lang.MemoryPool.CodeCache.max</queryResultKey>
-	    </aggregate>
+        <aggregates>
+            <aggregate resultAlias="jvm.java.lang.Memory.HeapMemoryUsage.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
+            <queryResultKey>jvm.java.lang.Memory.HeapMemoryUsage.used</queryResultKey>
+            <queryResultKey>jvm.java.lang.Memory.HeapMemoryUsage.max</queryResultKey>
+        </aggregate>
+            
+        <aggregate resultAlias="jvm.java.lang.MemoryPool.CodeCache.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
+            <queryResultKey>jvm.java.lang.MemoryPool.CodeCache.used</queryResultKey>
+            <queryResultKey>jvm.java.lang.MemoryPool.CodeCache.max</queryResultKey>
+        </aggregate>
 
-	    <aggregate resultAlias="jvm.java.lang.MemoryPool.CompressedClassSpace.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
-			<queryResultKey>jvm.java.lang.MemoryPool.CompressedClassSpace.used</queryResultKey>
-			<queryResultKey>jvm.java.lang.MemoryPool.CompressedClassSpace.max</queryResultKey>
-	    </aggregate>
+        <aggregate resultAlias="jvm.java.lang.MemoryPool.CompressedClassSpace.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
+            <queryResultKey>jvm.java.lang.MemoryPool.CompressedClassSpace.used</queryResultKey>
+            <queryResultKey>jvm.java.lang.MemoryPool.CompressedClassSpace.max</queryResultKey>
+        </aggregate>
 
-	    <aggregate resultAlias="jvm.java.lang.MemoryPool.PSEdenSpace.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
-			<queryResultKey>jvm.java.lang.MemoryPool.PSEdenSpace.used</queryResultKey>
-			<queryResultKey>jvm.java.lang.MemoryPool.PSEdenSpace.max</queryResultKey>
-	    </aggregate>
+        <aggregate resultAlias="jvm.java.lang.MemoryPool.PSEdenSpace.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
+            <queryResultKey>jvm.java.lang.MemoryPool.PSEdenSpace.used</queryResultKey>
+            <queryResultKey>jvm.java.lang.MemoryPool.PSEdenSpace.max</queryResultKey>
+        </aggregate>
 
-	    <aggregate resultAlias="jvm.java.lang.MemoryPool.PSSurvivorSpace.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
-			<queryResultKey>jvm.java.lang.MemoryPool.PSSurvivorSpace.used</queryResultKey>
-			<queryResultKey>jvm.java.lang.MemoryPool.PSSurvivorSpace.max</queryResultKey>
-	    </aggregate>
+        <aggregate resultAlias="jvm.java.lang.MemoryPool.PSSurvivorSpace.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
+            <queryResultKey>jvm.java.lang.MemoryPool.PSSurvivorSpace.used</queryResultKey>
+            <queryResultKey>jvm.java.lang.MemoryPool.PSSurvivorSpace.max</queryResultKey>
+        </aggregate>
 
-	    <aggregate resultAlias="jvm.java.lang.MemoryPool.PSOldGen.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
-			<queryResultKey>jvm.java.lang.MemoryPool.PSOldGen.used</queryResultKey>
-			<queryResultKey>jvm.java.lang.MemoryPool.PSOldGen.max</queryResultKey>
-	    </aggregate>
+        <aggregate resultAlias="jvm.java.lang.MemoryPool.PSOldGen.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
+            <queryResultKey>jvm.java.lang.MemoryPool.PSOldGen.used</queryResultKey>
+            <queryResultKey>jvm.java.lang.MemoryPool.PSOldGen.max</queryResultKey>
+        </aggregate>
 
-	    <aggregate resultAlias="jvm.java.lang.MemoryPool.PSPermGen.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
-			<queryResultKey>jvm.java.lang.MemoryPool.PSPermGen.used</queryResultKey>
-			<queryResultKey>jvm.java.lang.MemoryPool.PSPermGen.max</queryResultKey>
-	    </aggregate>
+        <aggregate resultAlias="jvm.java.lang.MemoryPool.PSPermGen.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
+            <queryResultKey>jvm.java.lang.MemoryPool.PSPermGen.used</queryResultKey>
+            <queryResultKey>jvm.java.lang.MemoryPool.PSPermGen.max</queryResultKey>
+        </aggregate>
 
-	    <aggregate resultAlias="jvm.java.lang.MemoryPool.Metaspace.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
-			<queryResultKey>jvm.java.lang.MemoryPool.Metaspace.used</queryResultKey>
-			<queryResultKey>jvm.java.lang.MemoryPool.Metaspace.max</queryResultKey>
-	    </aggregate>
-	</aggregates>
+        <aggregate resultAlias="jvm.java.lang.MemoryPool.Metaspace.usedPercent" type="GAUGE" class="org.jmxtrans.agent.openfalcon.DoubleAggregateDivisionMethod">
+            <queryResultKey>jvm.java.lang.MemoryPool.Metaspace.used</queryResultKey>
+            <queryResultKey>jvm.java.lang.MemoryPool.Metaspace.max</queryResultKey>
+        </aggregate>
+    </aggregates>
  
     </outputWriter>
 </jmxtrans-agent>
