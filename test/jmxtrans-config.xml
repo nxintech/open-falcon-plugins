@@ -69,9 +69,9 @@
         <query objectName="kafka.server:type=ReplicaManager,name=IsrShrinksPerSec" attribute="Count" resultAlias="kafka.server.ReplicaManager.IsrShrinksPerSec" type="GAUGE" />
         <query objectName="kafka.server:type=ReplicaManager,name=IsrExpandsPerSec" attribute="Count" resultAlias="kafka.server.ReplicaManager.IsrExpandsPerSec" type="GAUGE" />
     
-    <!- SpringBoot -->
+    <!-- SpringBoot -->
         
-    <queries>
+    </queries>
 
     <outputWriter class="org.jmxtrans.agent.openfalcon.OpenFalconHttpWriter">
         <url>http://localhost:1988/v1/push</url>
