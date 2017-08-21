@@ -12,6 +12,35 @@ import (
 	"github.com/open-falcon/common/model"
 )
 
+func TestUnmarshal(t *testing.T) {
+	b := []byte(`[
+    {
+        "CounterType": "GAUGE",
+        "Endpoint": "web-PC",
+        "Timestamp": 1487059682,
+        "Step": 60,
+        "TAGS": "domain=java.lang,type=Threading,name=ThreadCount",
+3        "Metric": "jvm.java.lang.Threading.ThreadCount",
+        "Value": 140
+    },
+    {
+        "CounterType": "GAUGE",
+        "Endpoint": "web-PC",
+        "Timestamp": 1487059682,
+        "Step": 60,
+        "TAGS": "domain=java.lang,type=Threading,name=PeakThreadCount",
+        "Metric": "jvm.java.lang.Threading.PeakThreadCount",
+        "Value": 141
+    }]`)
+	var metrics []*model.MetricValue
+	err := json.Unmarshal(b, &metrics)
+	if err != nil {
+		//t.Error(err)
+		t.Errorf("err %s, stdout: \n%s\n", err, b)
+	}
+	t.Log(metrics)
+}
+
 func TestCatalinaMonitorUnmarshal(t *testing.T) {
 	/*
 	 go1.8 go test use a temp dir for testing
