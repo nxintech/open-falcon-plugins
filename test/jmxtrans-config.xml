@@ -13,7 +13,7 @@
 
 	<!-- Memory -->
 	<query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="used" resultAlias="jvm.java.lang.Memory.HeapMemoryUsage.used" type="GAUGE"/>
-	<query objectName="java.lang:type=Memory" attribute="HeapMemoryUsagePercent" resultAlias="jvm.java.lang.Memory.HeapMemoryUsage.max" type="GAUGE"/>
+	<query objectName="java.lang:type=Memory" attribute="HeapMemoryUsagePercent" resultAlias="jvm.java.lang.Memory.HeapMemoryUsage.usedPercent" type="GAUGE"/>
 	<query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="max" resultAlias="jvm.java.lang.Memory.NonHeapMemoryUsage.max" type="GAUGE"/>
 	<query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="used" resultAlias="jvm.java.lang.Memory.NonHeapMemoryUsage.used" type="GAUGE"/>
 
