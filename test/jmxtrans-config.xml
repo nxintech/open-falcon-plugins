@@ -35,10 +35,10 @@
         <query objectName="java.lang:type=MemoryPool,name=PS Perm Gen" attribute="Usage" key="max" resultAlias="jvm.java.lang.MemoryPool.PSPermGen.max" type="GAUGE"/>
 
         <!-- GarbageCollector -->
-        <query objectName="java.lang:type=GarbageCollector,name=PS MarkSweep" attribute="CollectionCount" resultAlias="jvm.java.lang.MemoryPool.PSMarkSweep.CollectionCount" type="GAUGE"/>
-        <query objectName="java.lang:type=GarbageCollector,name=PS MarkSweep" attribute="CollectionTime" resultAlias="jvm.java.lang.MemoryPool.PSMarkSweep.CollectionTime" type="GAUGE"/>
-        <query objectName="java.lang:type=GarbageCollector,name=PS Scavenge" attribute="CollectionCount" resultAlias="jvm.java.lang.MemoryPool.PSScavenge.CollectionCount" type="GAUGE"/>
-        <query objectName="java.lang:type=GarbageCollector,name=PS Scavenge" attribute="CollectionTime" resultAlias="jvm.java.lang.MemoryPool.PSScavenge.CollectionTime" type="GAUGE"/>    
+        <query objectName="java.lang:type=GarbageCollector,name=PS MarkSweep" attribute="CollectionCount" resultAlias="jvm.java.lang.GarbageCollector.PSMarkSweep.CollectionCount" type="GAUGE"/>
+        <query objectName="java.lang:type=GarbageCollector,name=PS MarkSweep" attribute="CollectionTime" resultAlias="jvm.java.lang.GarbageCollector.PSMarkSweep.CollectionTime" type="GAUGE"/>
+        <query objectName="java.lang:type=GarbageCollector,name=PS Scavenge" attribute="CollectionCount" resultAlias="jvm.java.lang.GarbageCollector.PSScavenge.CollectionCount" type="GAUGE"/>
+        <query objectName="java.lang:type=GarbageCollector,name=PS Scavenge" attribute="CollectionTime" resultAlias="jvm.java.lang.GarbageCollector.PSScavenge.CollectionTime" type="GAUGE"/>    
 
     <!-- Catalina -->    
         <!-- ThreadPool -->
