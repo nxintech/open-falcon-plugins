@@ -5,16 +5,6 @@ import socket
 import requests
 import json
 
-# change below in your environment
-manager_host = ''
-manager_port = 15672
-username = ''
-password = ''
-
-# manager api 
-queue_list = 'http://{0}:{1}/api/queues/'
-queue_detail = 'http://{0}:{1}/api/queues/%2F/{2}'
-
 # open-falcon push data
 Entry = {
     "Endpoint": socket.gethostname(),
@@ -23,89 +13,130 @@ Entry = {
 }
 
 
-def new_entry(data):
+def new_entry(counter_type, metric, tag, value):
     entry = Entry.copy()
-    entry.update(data)
+    entry.update({
+        "CounterType": counter_type,
+        "Metric": metric,
+        "TAGS": "type=rabbit,{0}".format(tag),
+        "Value": value
+    })
     return entry
 
 
-def list_queue():
-    url = queue_list.format(manager_host, manager_port)
-    response = requests.get(url, auth=(username, password))
-    return response.json()
+class Manager(object):
+    def __init__(self, username, password, host="127.0.0.1", port=15672):
+        self.username = username
+        self.password = password
+        self.host = host
+        self.port = port
+        self.entries = []
 
+    @property
+    def api(self):
+        return "http://{0}:{1}/api/".format(self.host, self.port)
 
-def falcon_push_data(entries, queue_data):
-    queue_name = queue_data['name']
-    try:
-        message_stats = queue_data['message_stats']
-    except KeyError:
-        return
-    
-    # 'running' is 1
-    entries.append(new_entry({
-        "CounterType": "GAUGE",
-        "Metric": "rabbit.queue.state",
-        "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
-        "Value": 1 if queue_data['state'] == 'running' else 0
-    }))
+    def get_api_data(self, name):
+        url = self.api + name
+        response = requests.get(url, auth=(self.username, self.password))
+        return response.json()
 
-    # publish: Count of messages published.
-    entries.append(new_entry({
-        "CounterType": "GAUGE",
-        "Metric": "rabbit.queue.message_stats.publish",
-        "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
-        "Value": message_stats['publish']
-    }))
+    def dump_queues(self, excludes):
+        for q in self.get_api_data("queues"):
+            if q['name'] in excludes:
+                continue
+            self.dump_queue(q)
 
-    # confirm: Count of messages confirmed.
-    entries.append(new_entry({
-        "CounterType": "GAUGE",
-        "Metric": "rabbit.queue.message_stats.confirm",
-        "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
-        "Value": message_stats['confirm']
-    }))
+    def dump_queue(self, data):
+        tag = "queue_name={0}".format(data['name'])
 
-    # not every queue has deliver / get / deliver_get
-    try:
-        # deliver: Count of messages delivered in acknowledgement mode to consumers.
-        entries.append(new_entry({
-            "CounterType": "GAUGE",
-            "Metric": "rabbit.queue.message_stats.deliver",
-            "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
-            "Value": message_stats['deliver']
-        }))
-    except KeyError:
-        pass
+        # state 'running' is 1
+        self.entries.append(new_entry(
+            "GAUGE",
+            "rabbit.queue.state",
+            tag,
+            1 if data['state'] == 'running' else 0
+        ))
 
-    try:
-        # get: Count of messages delivered in acknowledgement mode in response to basic.get.
-        entries.append(new_entry({
-            "CounterType": "GAUGE",
-            "Metric": "rabbit.queue.message_stats.get",
-            "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
-            "Value": message_stats['get']
-        }))
-    except KeyError:
-        pass
+        if "message_stats" not in data:
+            return
 
-    try:
-        # deliver_get :Sum four of deliver/deliver_noack and get/get_noack
-        entries.append(new_entry({
-            "CounterType": "GAUGE",
-            "Metric": "rabbit.queue.message_stats.deliver_get",
-            "TAGS": "type=rabbit,queue_name={0}".format(queue_name),
-            "Value": message_stats['deliver_get']
-        }))
-    except KeyError:
-        pass
+        #################
+        # message_stats #
+        #################
+
+        message_stats = data['message_stats']
+
+        for key in ["publish", "confirm", "get", "deliver", "deliver_get"]:
+            # publish: Count of messages published.
+            # confirm: Count of messages confirmed.
+            # get: Count of messages delivered in acknowledgement mode in response to basic.get.
+            # deliver: Count of messages delivered in acknowledgement mode to consumers.
+            # deliver_get :Sum four of deliver/deliver_noack and get/get_noack.
+
+            if key in message_stats:
+                self.entries.append(new_entry(
+                    "GAUGE",
+                    "rabbit.queue.message_stats.{0}".format(key),
+                    tag,
+                    message_stats[key]
+                ))
+
+    def dump_nodes(self):
+        for node in self.get_api_data("nodes"):
+            self.dump_node(node)
+
+    def dump_node(self, data):
+        tag = "node={0}".format(data["name"])
+
+        partitions = 0 if data["partitions"] is None else 0
+        self.entries.append(new_entry(
+            "GAUGE",
+            "rabbit.node.partitions",
+            tag,
+            partitions
+        ))
+        running = 1 if data["running"] else 0
+        self.entries.append(new_entry(
+            "GAUGE",
+            "rabbit.node.running",
+            tag,
+            running
+        ))
+
+        for key in ["fd_used", "sockets_used", "proc_used",
+                    "io_read_avg_time", "io_write_avg_time",
+                    "io_sync_avg_time", "io_seek_avg_time",
+                    "io_file_handle_open_attempt_avg_time"]:
+            self.entries.append(new_entry(
+                "GAUGE",
+                "rabbit.node.{0}".format(key),
+                tag,
+                data[key]
+            ))
+
+        for key in ["io_read_count", "io_read_bytes",
+                    "io_write_count", "io_write_bytes",
+                    "io_sync_count", "io_seek_count", "io_reopen_count",
+                    "mnesia_ram_tx_count", "mnesia_disk_tx_count",
+                    "msg_store_read_count", "msg_store_write_count",
+                    "queue_index_journal_write_count",
+                    "queue_index_read_count", "queue_index_write_count",
+                    "gc_num", "gc_bytes_reclaimed",
+                    "context_switches", "io_file_handle_open_attempt_count",
+                    "sockets_total"]:
+            self.entries.append(new_entry(
+                "COUNTER",
+                "rabbit.node.{0}".format(key),
+                tag,
+                data[key]
+            ))
+
+    def dumps_all(self):
+        return json.dumps(self.entries)
 
 
 if __name__ == '__main__':
-    result = []
-    for queue in list_queue():
-        if queue['name'] == 'nxin.monitor.queue':
-            # pass this monitor queue
-            continue
-        falcon_push_data(result, queue)
-    print(json.dumps(result))
+    manager = Manager("user", "password")
+    manager.dump_queues(["nxin.monitor.queue"])
+    print(manager.dumps_all())
