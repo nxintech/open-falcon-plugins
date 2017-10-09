@@ -89,7 +89,7 @@ class Manager(object):
     def dump_node(self, data):
         tag = "node={0}".format(data["name"])
 
-        partitions = 0 if data["partitions"] is None else 0
+        partitions = 0 if data["partitions"] is None else 1
         self.entries.append(new_entry(
             "GAUGE",
             "rabbit.node.partitions",
