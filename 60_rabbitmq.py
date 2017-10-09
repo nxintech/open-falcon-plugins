@@ -139,4 +139,5 @@ class Manager(object):
 if __name__ == '__main__':
     manager = Manager("user", "password")
     manager.dump_queues(["nxin.monitor.queue"])
+    manager.dump_nodes()
     print(manager.dumps_all())
