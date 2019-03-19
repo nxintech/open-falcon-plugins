@@ -54,12 +54,12 @@ def redis_metric(result, port):
 
     # clients
     connected_clients = int(info['connected_clients'])
-    connected_clients_pct = int(info['connected_clients']) / int(r.config_get('maxclients')['maxclients']) * 100
+    connected_clients_pct = float(info['connected_clients']) / int(r.config_get('maxclients')['maxclients']) * 100
     result.append(guage('connected_clients', connected_clients))
     result.append(guage('connected_clients_pct', connected_clients_pct))
 
     # memory
-    used_memory = int(info['used_memory'])
+    used_memory = float(info['used_memory'])
     used_memory_pct = used_memory / int(info['maxmemory']) * 100
     mem_fragmentation_ratio = info['mem_fragmentation_ratio']
     result.append(guage('used_memory', used_memory))
